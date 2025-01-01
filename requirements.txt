@@ -1,5 +1,5 @@
 streamlit
 plotly
 matplotlib
-sklearn
+scikit-learn
 umap-learn

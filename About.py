@@ -9,6 +9,7 @@ st.title("🔬 B-Cell Leukemia Unsupervised Risk Stratification")
 
 st.markdown("Stratify patients based on their values.")
 
+st.logo("data/logo.png")
 
 st.subheader("References")
 
