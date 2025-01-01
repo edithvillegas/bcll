@@ -70,16 +70,13 @@ fig = px.scatter(
 # with open("data/umap_reducer.pickle", "rb") as file:
 #     umap_reducer = pickle.load(file)
 
-umap_reducer = joblib.load("data/umap_reducer.joblib")
-
+#umap_reducer = joblib.load("data/umap_reducer.joblib")
 
 st.text("tuta")
 
 #get umap coordinates
-umap_coordinates = umap_reducer.transform(new_data)
+#umap_coordinates = umap_reducer.transform(new_data)
  
-
-
 # add a single star point for the new patient
 fig.add_scatter(
     x=[10],
