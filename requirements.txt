@@ -3,3 +3,4 @@ plotly
 matplotlib
 scikit-learn
 umap-learn
+numpy

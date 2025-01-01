@@ -3,11 +3,11 @@
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
   "customizations": {
-    "codespaces": {
+    "codespaces": {  
       "openFiles": [
-        "README.md",
-        "About.py"
-      ]
+        "README.md", 
+        "About.py"       
+      ] 
     },
     "vscode": {
       "settings": {},
