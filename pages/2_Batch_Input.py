@@ -1,6 +1,12 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(
+    page_title="BCLL",
+    page_icon="data/logo.svg",  # Replace with the path to your image
+)
+st.logo("data/logo.svg")
+
 st.title("🔬 B-Cell Leukemia Unsupervised Risk Stratification")
 
 # Batch input
