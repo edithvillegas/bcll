@@ -22,8 +22,7 @@ st.title("🔬 B-Cell Leukemia Unsupervised Risk Stratification")
 st.subheader("Manually input data")
 
 st.markdown("""
-            Modify the values of the clinical values in the table and the patient 
-            prediction will automatically update at the bottom.
+            Modify the values of the clinical values in the table to obtain the patient prediction.
             """
             )
             
@@ -38,13 +37,14 @@ data = pd.DataFrame({
 })
 
 edited_data = st.data_editor(
-    data = data,
+    data=data,
     hide_index=True,
 )
 
-#predict new cluster 
-new_data = edited_data.astype("float")
-new_label = predict(new_data.iloc[0])
+# 👉 Add button
+if st.button("▶️ Run Prediction"):
+    new_data = edited_data.astype("float")
+    new_label = predict(new_data.iloc[0])
 
-st.text(f"Patient belongs to cluster: {new_label}")
+    st.success(f"Patient belongs to cluster: {new_label}")
 

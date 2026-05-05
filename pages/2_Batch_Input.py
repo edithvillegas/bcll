@@ -13,6 +13,10 @@ st.title("🔬 B-Cell Leukemia Unsupervised Risk Stratification")
 st.markdown("""
             Here you can upload your patient data as a CSV file to make batch predictions.
             Each row is a patient and each column is a clinical varible.
+
+            The values should be separated by commas and the names of the variables should be exactly:
+            CD38	CD49d	IGHV_mutation	FISH_Del17	FISH_Del11	FISH_Tri12	TP53
+            
             For an example of how the data should be formatted take a look at this test data:
             [Example CSV file](https://raw.githubusercontent.com/edithvillegas/bcll/refs/heads/main/data/test_dataset.csv)
             """
@@ -30,7 +34,6 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
     dataframe = pd.read_csv(uploaded_file, sep=",")
-    st.dataframe(dataframe, hide_index=True)
     dataframe["prediction"] = dataframe.apply(predict, axis=1)
 
     st.subheader("📊 Prediction Results")
