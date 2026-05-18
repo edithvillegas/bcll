@@ -61,7 +61,7 @@ if st.button("▶️ Run Prediction"):
     df = df[df.strata==cluster][["time", "estimate", "conf.low", "conf.high"]]
     df["estimate"]=df["estimate"]*100
     df["conf.low"]=df["conf.low"]*100
-    df["conf.high"]=df["estimate"]*100
+    df["conf.high"]=df["conf.high"]*100
     
     df.columns = [
         "Time (months)",
