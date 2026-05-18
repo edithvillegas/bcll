@@ -50,7 +50,7 @@ if st.button("▶️ Run Prediction"):
 
     cluster = str(new_label)
     st.image(
-                f"data/cluster_{cluster}.png",
+                f"data/ALLCASES_cluster_cuminc_cluster_{cluster}.png",
                 caption=f"Cluster {cluster} plot",
                 use_container_width=True
             )
