@@ -62,6 +62,7 @@ if st.button("▶️ Run Prediction"):
     decimal=","
     )
 
+    df.strata = df.strata.astype('str')
     df = df[df.strata==cluster][["time", "strata", "estimate", "conf.low", "conf.high"]]
     df["estimate"]=df["estimate"]*100
     df["conf.low"]=df["conf.low"]*100
