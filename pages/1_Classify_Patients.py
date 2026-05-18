@@ -49,11 +49,6 @@ if st.button("▶️ Run Prediction"):
     st.success(f"Patient belongs to cluster: {new_label}")
 
     cluster = str(new_label)
-    st.image(
-                f"data/ALLCASES_cluster_cuminc_cluster_{cluster}.png",
-                caption=f"",
-                use_container_width=True
-            )
     
     #show data about cluster 
     df = pd.read_csv(
@@ -63,18 +58,23 @@ if st.button("▶️ Run Prediction"):
     )
 
     df.strata = df.strata.astype('str')
-    df = df[df.strata==cluster][["time", "strata", "estimate", "conf.low", "conf.high"]]
+    df = df[df.strata==cluster][["time", "estimate", "conf.low", "conf.high"]]
     df["estimate"]=df["estimate"]*100
     df["conf.low"]=df["conf.low"]*100
     df["conf.high"]=df["estimate"]*100
     
     df.columns = [
         "Time (months)",
-        "Cluster",
         "% Patients Treated",
         "Lower Bound (CI)",
         "Higher Bound (CI)"
     ]
 
     st.dataframe(df)
+
+    st.image(
+                f"data/ALLCASES_cluster_cuminc_cluster_{cluster}.png",
+                caption=f"",
+                use_container_width=True
+            )
 
