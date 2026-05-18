@@ -48,3 +48,10 @@ if st.button("▶️ Run Prediction"):
 
     st.success(f"Patient belongs to cluster: {new_label}")
 
+    cluster = str(new_label)
+    st.image(
+                f"data/cluster_{cluster}.png",
+                caption=f"Cluster {cluster} plot",
+                use_container_width=True
+            )
+
