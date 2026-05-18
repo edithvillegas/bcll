@@ -70,7 +70,7 @@ if st.button("▶️ Run Prediction"):
         "Higher Bound (CI)"
     ]
 
-    st.dataframe(df)
+    st.dataframe(df, hide_index=True)
 
     st.image(
                 f"data/ALLCASES_cluster_cuminc_cluster_{cluster}.png",
