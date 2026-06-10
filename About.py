@@ -25,6 +25,13 @@ This website implements the classifier described in [1] for patient \
             
 For more information, please refer to the accompanying paper.
 """)
+
+st.page_link(
+    "pages/1_Classify_Patients.py",
+    label="Go to patient classification.",
+    icon="📊"
+)
+
 st.subheader("References")
 
 st.markdown(
