@@ -31,6 +31,11 @@ st.page_link(
     label="Go to patient classification.",
     icon="📊"
 )
+st.page_link(
+    "pages/2_Batch_Input.py",
+    label="Go to batch classification.",
+    icon="📦"
+)
 
 st.subheader("References")
 
