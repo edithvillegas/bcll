@@ -54,36 +54,35 @@ if st.button("▶️ Run Prediction"):
     #cluster description
     match cluster:
         case 1:
-            st.markdown("Clusters 1 gathers CLL cases which are negative for all features (CD38, CD49d, chromosomal aberrations, TP53 mutations) but have unmutated or borderline-mutated (97-100% of germline identity) IGHV genes. The prognosis is intermediate, with no significant stratification between true IGHV-unmutated cases and borderline-mutated cases.")
+            st.markdown("""
+                    Clusters 1 gathers CLL cases which are negative for all features (CD38, CD49d, chromosomal aberrations, TP53 mutations) but have unmutated or borderline-mutated (97-100% of germline identity) IGHV genes. The prognosis is intermediate, with no significant stratification between true IGHV-unmutated cases and borderline-mutated cases.
+                    """)
         case 2:
             st.markdown(
                 """
-                Cluster 2 gathers CLL cases which are negative for all features (CD38, CD49d, 
-                chromosomal aberrations, TP53 mutations) but have mutated IGHV genes (91-97% 
-                of germline identity) IGHV genes. Cluster 2 associates with long telomeres 
-                and overall genetic stability. The prognosis is favorable.
+                Cluster 2 gathers CLL cases which are negative for all features (CD38, CD49d, chromosomal aberrations, TP53 mutations) but have mutated IGHV genes (91-97% of germline identity) IGHV genes. Cluster 2 associates with long telomeres and overall genetic stability. The prognosis is favorable.
                 """
             )
         case 3:
             st.markdown("""
-                Cluster 3 gathers CLL cases which are negative for all features (CD38, CD49d, chromosomal aberrations, TP53 mutations) and have highly- mutated IGHV genes (less than 91% of germline identity). Cluster 3, similarly to cluster 2,  associates with long telomeres and overall genetic stability.
-            """)
+                Cluster 3 gathers CLL cases which are negative for all features (CD38, CD49d, chromosomal aberrations, TP53 mutations) and have highly- mutated IGHV genes (less than 91% of germline identity). Cluster 3, similarly to cluster 2,  associates with long telomeres and overall genetic stability. The prognosis is favorable.            
+                        """)
         case 4:
             st.markdown("""
-                Cluster 4 includes patients showing expression of the CD49d integrin and/or CD38. These cases do not carry significant chromosomal aberrations or TP53 mutations. Immunoglobulin genes can be variably mutated.
-            """)
+                Cluster 4 includes patients showing expression of the CD49d integrin and/or CD38. These cases do not carry significant chromosomal aberrations or TP53 mutations. Immunoglobulin genes can be either mutated or unmutated.  The prognosis is intermediate.            
+                        """)
         case 5:
             st.markdown("""
-                Cluster 5 is constituted by patients with trisomy 12; this chromosomal aberration strongly associated with expression of CD49d and CD38. Immunoglobulin genes can be variably mutated, but carry limited prognostic significance.
-            """)
+                Cluster 5 is constituted by patients with trisomy 12; this chromosomal aberration strongly associated with expression of CD49d and CD38. Immunoglobulin genes can be variably mutated, but carry limited prognostic significance. The prognosis is intermediate-low.
+                        """)
         case 6:
             st.markdown("""
-                Cluster 6 gathers patients with elevated del(11q) levels; IGHV genes are mostly unmutated; TP53 disruption (mutation or deletion) is generally mutually exclusive. Telomeres are significantly shorter than other clusters and suggest a degree of chromosomal instability. 
-            """)
+                Cluster 6 gathers patients with elevated del(11q) levels; IGHV genes are mostly unmutated; TP53 disruption (mutation or deletion) is generally mutually exclusive. Telomeres are significantly shorter than other clusters and suggest a degree of chromosomal instability. The prognosis is mostly unfavorable.
+                        """)
         case 7:
             st.markdown("""
-                Cluster 7 includes patients with TP53 disruption with high mutation burden and/or del(17p). Other features such as trisomy 12, del(11q) and CD38 are frequently negative; CD49d can be variably expressed, as well as IGHV mutation, but these features do not add significant prognostic information.
-            """)
+                Cluster 7 includes patients with TP53 disruption with high mutation burden and/or del(17p). Other features such as trisomy 12, del(11q) and CD38 are frequently negative; CD49d can be variably expressed, as well as IGHV mutation, but these features do not add significant prognostic information. This cluster associates with short telomere length, suggesting presence of chromosomal instability. The prognosis is unfavorable.
+                        """)
 
     
     cluster = str(new_label)
@@ -102,11 +101,21 @@ if st.button("▶️ Run Prediction"):
     
     df.columns = [
         "Time (months)",
-        "% Patients Treated",
+        "% Risk of Treatment",
         "Lower Bound (CI)",
         "Higher Bound (CI)"
     ]
 
+    column_config = {
+        col: st.column_config.NumberColumn(format="%.1f")
+        for col in df.select_dtypes("float").columns
+    }
+
+    st.dataframe(
+        df,
+        hide_index=True,
+        column_config=column_config
+    )
     st.dataframe(df, hide_index=True)
 
     st.image(
