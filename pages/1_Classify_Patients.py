@@ -116,7 +116,6 @@ if st.button("▶️ Run Prediction"):
         hide_index=True,
         column_config=column_config
     )
-    st.dataframe(df, hide_index=True)
 
     st.image(
                 f"data/ALLCASES_cluster_cuminc_cluster_{cluster}.png",
