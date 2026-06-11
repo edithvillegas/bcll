@@ -30,7 +30,6 @@ def predict(patient):
 
 
 # predict function version with booleans
-
 def predict_bool(patient):
 
     # this is the risk class calculator
