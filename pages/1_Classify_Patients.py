@@ -8,7 +8,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 import umap
 
-from src.prediction import predict
+from src.prediction import predict, predict_bool
 
 st.set_page_config(
     page_title="BCLL",
@@ -18,34 +18,52 @@ st.logo("data/logo.svg")
 
 st.title("🔬 B-Cell Leukemia Unsupervised Risk Stratification")
 
-# Manually input data
-st.subheader("Manually input data")
-
 st.markdown("""
-            Modify the values of the clinical values in the table to obtain the patient prediction.
+            Modify the values of the clinical variables to obtain the patient prediction. 
+            You can choose to either input the numeric values or reply to a series of yes/no questions.
             """
             )
             
-data = pd.DataFrame({
-    "IGHV_mutation": [0],
-    "FISH_Tri12": [0],
-    "FISH_Del11": [0],
-    "CD38": [0],
-    "CD49d": [0],
-    "TP53": [0],
-    "FISH_Del17": [0],
-})
+input_questions = st.toggle("Toggle to change between numeric values or answer yes/no questions.")
 
-edited_data = st.data_editor(
-    data=data,
-    hide_index=True,
-)
+if input_questions:
+    st.subheader("Answer Yes/No questions")
+
+    #input variables
+    patient = dict()
+    patient["TP53_above"] = st.toggle("Is the value of TP53 above 36 ?")
+    patient["FISH_Del11_above"] = st.toggle("Is the value of FISH_Del11 above 34 ?")
+    patient["FISH_Tri12_above"] = st.toggle("Is the value of FISH_Tri12 above 20 ?")
+    patient["IGHV_mutation_above"] = st.toggle("Is the value of IGHV_mutation above 9 ?")
+    patient["CD49d_above"] = st.toggle("Is the value of CD49d above 42 ?")
+    patient["CD38_above"] = st.toggle("Is the value of CD38 above 42 ?")
+    patient["IGHV_mutation_above2"] = st.toggle("Is the value of IGHV_mutation above 3 ?")
+
+else:
+    st.subheader("Input Numeric Values")
+
+    data = pd.DataFrame({
+        "IGHV_mutation": [0],
+        "FISH_Tri12": [0],
+        "FISH_Del11": [0],
+        "CD38": [0],
+        "CD49d": [0],
+        "TP53": [0],
+        "FISH_Del17": [0],
+    })
+
+    edited_data = st.data_editor(
+        data=data,
+        hide_index=True,
+    )
 
 # 👉 Add button
 if st.button("▶️ Run Prediction"):
-    new_data = edited_data.astype("float")
-    new_label = predict(new_data.iloc[0])
-
+    if input_questions:
+        new_label = predict_bool(patient)
+    else:
+        new_label = predict(edited_data.astype("float").iloc[0])
+    
     st.success(f"Patient belongs to cluster: {new_label}")
 
     #cluster data
